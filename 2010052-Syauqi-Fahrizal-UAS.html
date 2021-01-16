@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>**Pemesanan Tiket Maskapai**</title>
+
+    <style type="text/css">
+        #container {
+            display: flex;
+            box-sizing : border-box;
+	        width: 100%;
+	        padding: 10px;
+	        font-size: 11pt;
+	        margin-bottom: 20px;
+        }
+        
+        #left {
+            width: 50%;
+        }
+        
+        #right {
+            width: 50%;
+        }
+        .divForm {
+            box-sizing : border-box;
+	        width: 100%;
+	        padding: 10px;
+	        font-size: 11pt;
+	        margin-bottom: 20px;
+        }
+        #result{
+            display: flex;
+            box-sizing : border-box;
+	        width: 100%;
+	        padding: 10px;
+	        font-size: 11pt;
+	        margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>**Pemesanan Tiket Maskapai**</h1>
+    <div id="container">
+        <div id="left">
+            <div class="divForm">
+                <label for="nama">Nama Pemesan :</label>
+                <input type="text" name="nama" id="nama" size=25>
+            </div>
+            <div class="divForm">
+                <label for="jumlah">Jumlah Tiket :</label>
+                <input type="text" name="jumlah" id="jumlah" size=5>
+            </div>
+            <div class="divForm">
+                <label for="kelas">kelas :</label>
+                <select name="kelas" id="kelas">
+                    <option value="ekonomi">Ekonomi</option>
+                    <option value="bisnis">Bisnis</option>
+                    <option value="eksekutif">Eksekutif</option>
+                </select>
+            </div>
+            <div class="divForm">
+                <label for="tujuan">tujuan :</label>
+                <select name="tujuan" id="tujuan">
+                    <option value="bali">Bali</option>
+                    <option value="lombok">Lombok</option>
+                    <option value="timika">Timika</option>
+                </select>
+            </div>
+            <div class="divForm">
+                <label for="bagasi">Bagasi :</label>
+                <input type="radio" name="bagasi" id="bagasi" value="5kg"><label for="5kg">5kg</label>
+                <input type="radio" name="bagasi" id="bagasi" value="10kg"><label for="10kg">10kg</label>
+                <input type="radio" name="bagasi" id="bagasi" value="15kg"><label for="15kg">15kg</label>
+            </div>
+            <div class="divForm">
+                <label for="asuransi">Asuransi :<br></label>
+                <input type="checkbox" name="asuransi" id="asuransi" value="Asuransi-Jiwa"><label for="Asuransi-Jiwa">Asuransi-Jiwa <br></label>
+                <input type="checkbox" name="asuransi" id="asuransi" value="Asuransi-Kecelakaan"><label for="Asuransi-Kecelakaan">Kecelakaan <br></label>
+                <input type="checkbox" name="asuransi" id="asuransi" value="Asuransi-Keterlambatan"><label for="Asuransi-Keterlambatan">Asuransi-Keterlambatan<br></label>
+            </div>
+            <div class="divForm">
+               <button> <Simpan type="button" id="simpan" >Simpan</button>
+            </div>
+        </div>
+        <div id="right">
+            <div id="result">
+                Nama Pemesan : <br> Jumlah Tiket : <br> Kelas : <br> Tujuan  : <br> Asuransi : <br> Total Harga :<br> 
+            </div>
+    <script type="text/javascript">
+        document.getElementById('simpan').addEventListener('click', simpan);
+
+            function simpan() {
+                let getAsuransi = document.querySelectorAll('input[name="asuransi"]:checked');
+            var hoby = [];
+
+            for (i = 0; i < getAsuransi.length; i++) {
+                hoby.push(getAsuransi[i].value);
+            }
+            var nama = (document.form.nama.value);
+            var kelas = (document.form.kelas.value);
+            var jumlahtiket = parseFloat (document.form.jumlah.value);
+            var bagasi = (document.form.bagasi.value);
+            var asuransi = (document.form.asuransi.value);
+            var ht = 0.0 ;
+            var biaya =0.0;
+            var sub = 0.0;
+            var diskon = 0.0;
+            var total = 0.0;
+            var tambah = 0.0;
+        
+            if (kelas == "ekonomi") {
+            ht = 1000000;
+            }
+            else if(kelas == "bisnis" )
+            {
+            ht = 2000000;
+            }
+            else
+            {
+            ht = 3000000;
+            }
+
+            if(jumlahtiket>3)
+            {
+             diskon = ht * 30/100;   
+            }
+            else
+            {
+                diskon=o;
+            }
+ 
+            if(bagasi =="5kg")
+            {
+
+                biaya = ht + 100.000;
+            }
+            else if( bagasi =="10kg")
+            {
+
+                biaya = ht + 150.000
+            }
+            else{
+                biaya = ht + 200.000
+            }
+            if (document.form.asuransi.checked == true) 
+            {
+             tambah = ht + 50.000;
+            }
+            else
+            {
+             tambah=0;
+            }
+            total = ht + biaya + tambah - diskon;
+
+            document.getElementById('result').innerHTML = `
+            Nama Pemesan : ${document.getElementById('nama').value}<br>
+            Nama Pemesan : ${document.getElementById('kelas').value}<br>
+            Jumlah Tiket : ${document.querySelector('input[name="jumlah"]:checked').value}<br>
+            Tujuan : ${document.getElementById('tujuan').value}<br>
+            Asuransi : ${asuransi.join(", ")}<br>
+            Total Harga : ${total.join(", ")}<br>
+            
+    `;
+}
+</script>
+    </script>
+</body>
+</html>
